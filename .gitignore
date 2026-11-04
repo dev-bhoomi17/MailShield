@@ -1,0 +1,29 @@
+# Python environment
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+
+# Testing and coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# IDE and editor files
+.vscode/
+.idea/
+
+# DKIM private and public keys
+keys/*.pem
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

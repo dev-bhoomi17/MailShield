@@ -1,0 +1,810 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MailShield | Security Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="dashboard-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="sidebar-brand">
+            <div class="sidebar-logo">🛡️</div>
+            <div>
+                <h2>MailShield</h2>
+                <span>SECURITY GATEWAY</span>
+            </div>
+        </div>
+
+        <div class="sidebar-label">WORKSPACE</div>
+
+        <nav class="sidebar-nav">
+
+            <a href="#overview" class="sidebar-link active">
+                <span>⌂</span> Overview
+            </a>
+
+            <a href="#header-analyzer" class="sidebar-link">
+                <span>✉</span> Header Analyzer
+            </a>
+
+            <a href="#spf-checker" class="sidebar-link">
+                <span>🌐</span> SPF Checker
+            </a>
+
+            <a href="#dkim-management" class="sidebar-link">
+                <span>🔑</span> DKIM Keys
+            </a>
+
+            <a href="#dkim-testing" class="sidebar-link">
+                <span>✓</span> DKIM Testing
+            </a>
+
+            <a href="#dmarc-checker" class="sidebar-link">
+                <span>🛡</span> DMARC Checker
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="sidebar-security">
+                <span class="live-dot"></span>
+                <div>
+                    <strong>System Active</strong>
+                    <small>MailShield is running</small>
+                </div>
+            </div>
+
+            <p>MailShield v1.0</p>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN DASHBOARD -->
+    <main class="main-content">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+
+            <div>
+                <span class="topbar-label">EMAIL SECURITY PLATFORM</span>
+                <h2>Security Dashboard</h2>
+            </div>
+
+            <div class="topbar-status">
+                <span class="live-dot"></span>
+                All Systems Operational
+            </div>
+
+        </header>
+
+
+        <!-- OVERVIEW -->
+        <section class="hero" id="overview">
+
+            <div class="hero-content">
+
+                <span class="eyebrow">
+                    EMAIL SECURITY • SPF • DKIM • DMARC
+                </span>
+
+                <h1>
+                    Secure your emails.<br>
+                    <span>Trust every sender.</span>
+                </h1>
+
+                <p>
+                    Monitor email authentication, verify digital signatures
+                    and analyze sender policies through one unified
+                    security workspace.
+                </p>
+
+                <div class="hero-tags">
+                    <span>✓ SPF Analysis</span>
+                    <span>✓ DKIM Verification</span>
+                    <span>✓ DMARC Alignment</span>
+                </div>
+
+            </div>
+
+            <div class="hero-visual">
+                <div class="shield-circle">
+                    <span>🛡️</span>
+                </div>
+
+                <div class="floating-tag tag-one">SPF ✓</div>
+                <div class="floating-tag tag-two">DKIM ✓</div>
+                <div class="floating-tag tag-three">DMARC ✓</div>
+            </div>
+
+        </section>
+
+
+        <!-- AUTHENTICATION OVERVIEW -->
+        <section class="overview-section">
+
+            <div class="section-heading">
+                <div>
+                    <span class="section-label">SECURITY OVERVIEW</span>
+                    <h2>Authentication Modules</h2>
+                    <p>Your email authentication tools at a glance.</p>
+                </div>
+            </div>
+
+            <div class="overview-grid">
+
+                <a href="#spf-checker" class="overview-card">
+                    <div class="overview-icon spf-icon">🌐</div>
+                    <div>
+                        <span>MODULE 01</span>
+                        <h3>SPF</h3>
+                        <p>Sender IP authorization</p>
+                    </div>
+                    <span class="overview-arrow">↗</span>
+                </a>
+
+                <a href="#dkim-management" class="overview-card">
+                    <div class="overview-icon dkim-icon">🔑</div>
+                    <div>
+                        <span>MODULE 02</span>
+                        <h3>DKIM</h3>
+                        <p>Digital signature verification</p>
+                    </div>
+                    <span class="overview-arrow">↗</span>
+                </a>
+
+                <a href="#dmarc-checker" class="overview-card">
+                    <div class="overview-icon dmarc-icon">🛡️</div>
+                    <div>
+                        <span>MODULE 03</span>
+                        <h3>DMARC</h3>
+                        <p>Domain alignment and policy</p>
+                    </div>
+                    <span class="overview-arrow">↗</span>
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- HEADER ANALYZER -->
+        <section id="header-analyzer" class="workspace-section">
+
+            <div class="section-heading">
+                <div>
+                    <span class="section-label">ANALYSIS TOOL · 01</span>
+                    <h2>Email Header Analyzer</h2>
+                    <p>
+                        Inspect authentication information from raw email headers.
+                    </p>
+                </div>
+            </div>
+
+            <div class="analyzer-card">
+
+                <div class="card-heading">
+                    <div class="heading-icon">✉️</div>
+                    <div>
+                        <h3>Analyze an Email</h3>
+                        <p>Paste the raw email headers below.</p>
+                    </div>
+                </div>
+
+                <form method="POST" action="/">
+
+                    <label for="raw_headers">RAW EMAIL HEADERS</label>
+
+                    <textarea
+                        name="raw_headers"
+                        id="raw_headers"
+                        placeholder="From: sender@example.com&#10;To: receiver@example.com&#10;Subject: Test Email&#10;Authentication-Results: ..."
+                        required
+                    ></textarea>
+
+                    <div class="form-footer">
+                        <span>
+                            Supported: Authentication-Results, Received-SPF
+                        </span>
+
+                        <button type="submit">
+                            Analyze Email <span>→</span>
+                        </button>
+                    </div>
+
+                </form>
+
+                {% if error %}
+                    <div class="error-message">
+                        {{ error }}
+                    </div>
+                {% endif %}
+
+            </div>
+
+        </section>
+
+
+        <!-- HEADER ANALYSIS RESULTS -->
+        {% if parsed_data %}
+
+        <section class="results-section">
+
+            <div class="section-heading">
+                <div>
+                    <span class="section-label">SCAN REPORT</span>
+                    <h2>Analysis Results</h2>
+                    <p>
+                        Authentication information extracted from your email.
+                    </p>
+                </div>
+                <span class="tool-number">RESULTS</span>
+            </div>
+
+            <div class="details-card">
+
+                <div class="card-heading">
+                    <div class="heading-icon">📨</div>
+                    <div>
+                        <h3>Email Information</h3>
+                        <p>Basic message details</p>
+                    </div>
+                </div>
+
+                <div class="info-grid">
+
+                    <div>
+                        <span>FROM</span>
+                        <p>{{ parsed_data.from }}</p>
+                    </div>
+
+                    <div>
+                        <span>RETURN PATH</span>
+                        <p>{{ parsed_data.return_path }}</p>
+                    </div>
+
+                    <div>
+                        <span>MESSAGE ID</span>
+                        <p>{{ parsed_data.message_id }}</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="auth-heading">
+                <h3>Authentication Status</h3>
+                <p>Results reported in the supplied email headers.</p>
+            </div>
+
+            <div class="status-grid">
+
+                {% for protocol, status in auth_summary.items() %}
+
+                <div class="status-card">
+
+                    <div class="status-top">
+
+                        <span class="protocol-icon">
+                            {% if protocol == 'SPF' %}
+                                🌐
+                            {% elif protocol == 'DKIM' %}
+                                🔑
+                            {% else %}
+                                🛡️
+                            {% endif %}
+                        </span>
+
+                        <span class="status-indicator
+                            {% if status == 'PASS' %}pass-bg
+                            {% elif status == 'FAIL' %}fail-bg
+                            {% else %}unknown-bg{% endif %}">
+
+                            {% if status == 'PASS' %}✓
+                            {% elif status == 'FAIL' %}!
+                            {% else %}?{% endif %}
+
+                        </span>
+
+                    </div>
+
+                    <h4>{{ protocol }}</h4>
+
+                    <span class="status-value
+                        {% if status == 'PASS' %}pass
+                        {% elif status == 'FAIL' %}fail
+                        {% else %}unknown{% endif %}">
+                        {{ status }}
+                    </span>
+
+                    <p>
+                        {% if status == 'PASS' %}
+                            Authentication passed
+                        {% elif status == 'FAIL' %}
+                            Authentication failed
+                        {% else %}
+                            No result available
+                        {% endif %}
+                    </p>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            <div class="details-card">
+
+                <div class="card-heading">
+                    <div class="heading-icon">📋</div>
+                    <div>
+                        <h3>Authentication-Results</h3>
+                        <p>Reported authentication information</p>
+                    </div>
+                </div>
+
+                {% if parsed_data.authentication_results %}
+                    {% for result in parsed_data.authentication_results %}
+                        <p class="header-result">{{ result }}</p>
+                    {% endfor %}
+                {% else %}
+                    <p>No Authentication-Results header found.</p>
+                {% endif %}
+
+            </div>
+
+
+            <div class="details-card">
+
+                <div class="card-heading">
+                    <div class="heading-icon">🔍</div>
+                    <div>
+                        <h3>Received-SPF</h3>
+                        <p>SPF information reported by the receiver</p>
+                    </div>
+                </div>
+
+                {% if parsed_data.received_spf %}
+                    {% for result in parsed_data.received_spf %}
+                        <p class="header-result">{{ result }}</p>
+                    {% endfor %}
+                {% else %}
+                    <p>No Received-SPF header found.</p>
+                {% endif %}
+
+            </div>
+
+
+            <div class="warning">
+                <strong>⚠️ Important Security Note</strong>
+                <p>
+                    These results are extracted from the supplied email
+                    headers. They are not independent verification.
+                    Only trust Authentication-Results added by a trusted
+                    receiving mail server.
+                </p>
+            </div>
+
+        </section>
+
+        {% endif %}
+
+
+        <!-- DKIM KEY MANAGEMENT -->
+        <section class="management-section workspace-section"
+                 id="dkim-management">
+
+            <div class="section-heading">
+                <div>
+                    <span class="section-label">KEY MANAGEMENT · 02</span>
+                    <h2>DKIM Key Management</h2>
+                    <p>
+                        Generate RSA 2048-bit keys and prepare your DKIM DNS record.
+                    </p>
+                </div>
+            </div>
+
+            <div class="key-panel">
+
+                <div class="key-info">
+                    <h3>Generate DKIM Key Pair</h3>
+                    <p>
+                        Create a private key for email signing and a public key
+                        for DKIM verification.
+                    </p>
+
+                    <p class="key-notice">
+                        Generating a new pair replaces the existing local keys.
+                    </p>
+                </div>
+
+                <form action="{{ url_for('generate_keys') }}" method="POST">
+
+                    <button type="submit" class="analyze-btn">
+                        Generate DKIM Keys →
+                    </button>
+
+                </form>
+
+                {% if dkim_message %}
+
+                <div class="key-result">
+
+                    <h3>{{ dkim_message }}</h3>
+
+                    {% if dkim_record %}
+
+                        <p><strong>DNS Host Name:</strong></p>
+                        <code>mailshield._domainkey.example.test</code>
+
+                        <p><strong>DNS TXT Record:</strong></p>
+                        <pre>{{ dkim_record }}</pre>
+
+                        <p><strong>Private Key Storage:</strong></p>
+                        <code>{{ private_key_path }}</code>
+
+                        <p class="key-notice">
+                            This DNS record is generated locally for demonstration.
+                            It has not been published to public DNS.
+                        </p>
+
+                    {% endif %}
+
+                </div>
+
+                {% endif %}
+
+            </div>
+
+        </section>
+
+
+        <!-- DKIM SIGNING AND VERIFICATION -->
+        <section class="management-section workspace-section"
+                 id="dkim-testing">
+
+            <div class="section-heading">
+                <div>
+                    <span class="section-label">SIGNATURE VERIFICATION · 03</span>
+                    <h2>DKIM Email Testing</h2>
+                    <p>
+                        Sign a sample email and verify its DKIM signature locally.
+                    </p>
+                </div>
+            </div>
+
+            <div class="key-panel">
+
+                <form action="{{ url_for('test_dkim') }}" method="POST">
+
+                    <div class="key-info">
+                        <h3>Test Email</h3>
+                        <p>
+                            Enter a sample email with From, To and Subject headers.
+                        </p>
+                    </div>
+
+                    <textarea
+                        name="raw_email"
+                        rows="9"
+                        placeholder="From: sender@example.test&#10;To: receiver@example.test&#10;Subject: MailShield Test&#10;&#10;This is a test email."
+                        required
+                    ></textarea>
+
+                    <button type="submit" class="analyze-btn">
+                        Sign &amp; Verify Email →
+                    </button>
+
+                </form>
+
+                {% if dkim_test_error %}
+                    <div class="key-notice">
+                        {{ dkim_test_error }}
+                    </div>
+                {% endif %}
+
+                {% if verification %}
+
+                <div class="key-result">
+
+                    <h3>DKIM Verification Result</h3>
+
+                    <p>
+                        <strong>Status:</strong>
+                        {{ verification.status }}
+                    </p>
+
+                    <p>{{ verification.message }}</p>
+
+                    <p><strong>Signed Email:</strong></p>
+                    <pre>{{ signed_email }}</pre>
+
+                </div>
+
+                {% endif %}
+
+            </div>
+
+        </section>
+
+
+        <!-- SPF CHECKER -->
+        <section class="management-section workspace-section"
+                 id="spf-checker">
+
+            <div class="section-heading">
+                <div>
+                    <span class="section-label">SENDER AUTHENTICATION · 04</span>
+                    <h2>SPF Authentication Checker</h2>
+                    <p>
+                        Check whether a sender IP address is authorized by an SPF record.
+                    </p>
+                </div>
+            </div>
+
+            <div class="key-panel">
+
+                <form action="{{ url_for('check_spf_route') }}" method="POST">
+
+                    <div class="key-info">
+                        <h3>SPF Configuration</h3>
+                        <p>
+                            Enter the domain, sender IP and SPF record for testing.
+                        </p>
+                    </div>
+
+                    <label for="spf-domain">
+                        <strong>Domain Name</strong>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="spf-domain"
+                        name="domain"
+                        placeholder="example.test"
+                        required
+                    >
+
+                    <label for="sender-ip">
+                        <strong>Sender IP Address</strong>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="sender-ip"
+                        name="sender_ip"
+                        placeholder="192.0.2.10"
+                        required
+                    >
+
+                    <label for="spf-record">
+                        <strong>SPF TXT Record</strong>
+                    </label>
+
+                    <textarea
+                        id="spf-record"
+                        name="spf_record"
+                        rows="3"
+                        placeholder="v=spf1 ip4:192.0.2.10 -all"
+                        required
+                    ></textarea>
+
+                    <button type="submit" class="analyze-btn">
+                        Check SPF Authentication →
+                    </button>
+
+                </form>
+
+                {% if spf_result %}
+
+                <div class="key-result">
+
+                    <h3>SPF Authentication Result</h3>
+
+                    <p>
+                        <strong>Status:</strong>
+                        {{ spf_result.status }}
+                    </p>
+
+                    <p>{{ spf_result.message }}</p>
+
+                    {% if spf_result.record %}
+                        <p><strong>Tested SPF Record:</strong></p>
+                        <pre>{{ spf_result.record }}</pre>
+                    {% endif %}
+
+                </div>
+
+                {% endif %}
+
+                <p class="key-notice">
+                    Local simulation: the manually entered SPF record is evaluated
+                    by MailShield. No public DNS record is changed.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- DMARC CHECKER -->
+        <section class="management-section workspace-section"
+                 id="dmarc-checker">
+
+            <div class="section-heading">
+                <div>
+                    <span class="section-label">DOMAIN PROTECTION · 05</span>
+                    <h2>DMARC Policy Checker</h2>
+                    <p>
+                        Evaluate email authentication results and domain alignment.
+                    </p>
+                </div>
+            </div>
+
+            <div class="key-panel">
+
+                <form action="{{ url_for('check_dmarc_route') }}"
+                      method="POST">
+
+                    <div class="key-info">
+                        <h3>DMARC Configuration</h3>
+                        <p>
+                            Enter the email domain, SPF/DKIM results and DMARC policy.
+                        </p>
+                    </div>
+
+                    <label for="from-domain">
+                        <strong>From Domain</strong>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="from-domain"
+                        name="from_domain"
+                        placeholder="example.test"
+                        required
+                    >
+
+                    <label for="spf-result">
+                        <strong>SPF Authentication Result</strong>
+                    </label>
+
+                    <select id="spf-result" name="spf_result" required>
+                        <option value="PASS">PASS</option>
+                        <option value="FAIL">FAIL</option>
+                    </select>
+
+                    <label for="spf-domain">
+                        <strong>SPF Authenticated Domain</strong>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="spf-domain"
+                        name="spf_domain"
+                        placeholder="example.test"
+                        required
+                    >
+
+                    <label for="dkim-result">
+                        <strong>DKIM Authentication Result</strong>
+                    </label>
+
+                    <select id="dkim-result" name="dkim_result" required>
+                        <option value="PASS">PASS</option>
+                        <option value="FAIL">FAIL</option>
+                    </select>
+
+                    <label for="dkim-domain">
+                        <strong>DKIM Signing Domain</strong>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="dkim-domain"
+                        name="dkim_domain"
+                        placeholder="example.test"
+                        required
+                    >
+
+                    <label for="dmarc-record">
+                        <strong>DMARC TXT Record</strong>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="dmarc-record"
+                        name="dmarc_record"
+                        placeholder="v=DMARC1; p=reject"
+                        required
+                    >
+
+                    <button type="submit" class="analyze-btn">
+                        Evaluate DMARC →
+                    </button>
+
+                </form>
+
+                {% if dmarc_result %}
+
+                <div class="key-result">
+
+                    <h3>DMARC Evaluation Result</h3>
+
+                    <p>
+                        <strong>Status:</strong>
+                        {{ dmarc_result.status }}
+                    </p>
+
+                    <p>
+                        <strong>Policy:</strong>
+                        {{ dmarc_result.policy }}
+                    </p>
+
+                    <p>{{ dmarc_result.message }}</p>
+
+                    {% if dmarc_result.status in ["PASS", "FAIL"] %}
+
+                        <p>
+                            <strong>SPF Alignment:</strong>
+                            {{ "PASS" if dmarc_result.spf_aligned else "FAIL" }}
+                        </p>
+
+                        <p>
+                            <strong>DKIM Alignment:</strong>
+                            {{ "PASS" if dmarc_result.dkim_aligned else "FAIL" }}
+                        </p>
+
+                    {% endif %}
+
+                </div>
+
+                {% endif %}
+
+                <p class="key-notice">
+                    Local simulation: DMARC alignment and policy are evaluated.
+                    Actual email quarantine or rejection requires a mail server
+                    configured to enforce the policy.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+        <footer class="dashboard-footer">
+
+            <div>
+                <h3>🛡️ MailShield</h3>
+                <p>Secure Email Authentication Gateway</p>
+            </div>
+
+            <span>SPF · DKIM · DMARC</span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
