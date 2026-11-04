@@ -1,59 +1,57 @@
 # MailShield – Secure Email Authentication Gateway
 
-MailShield is a Flask-based web application designed to demonstrate email authentication concepts and help users analyze email authentication results.
+MailShield is a web-based email authentication gateway developed using Python and Flask. It helps users understand and test email authentication mechanisms such as SPF, DKIM, and DMARC through a simple dashboard.
 
-It provides tools for analyzing email headers and testing SPF, DKIM, and DMARC authentication logic through an interactive dashboard.
+**Live Demo:** https://mailshield-3rxl.onrender.com
+
+**GitHub Repository:** https://github.com/dev-bhoomi17/MailShield
 
 ## Features
 
-- **Email Header Analyzer:** Extracts important email header fields and displays SPF, DKIM, and DMARC results reported in Authentication-Results headers.
-- **SPF Checker:** Evaluates sender IP addresses against supported SPF mechanisms.
-- **DKIM Key Management:** Generates RSA 2048-bit DKIM key pairs and displays the public DNS TXT record.
-- **DKIM Testing:** Locally signs a test email and verifies its DKIM signature.
-- **DMARC Checker:** Evaluates SPF/DKIM domain alignment against a supplied DMARC policy.
-- **Security Headers:** Configures basic HTTP security response headers.
-- **Automated Testing:** Includes pytest test cases for core functionality and Flask routes.
+- **Email Header Analyzer:** Extracts important email header information and displays SPF, DKIM, and DMARC results reported in the supplied headers.
+- **SPF Checker:** Evaluates sender IP addresses against supported SPF record mechanisms.
+- **DKIM Key Management:** Generates RSA 2048-bit DKIM key pairs and displays the DNS TXT record.
+- **DKIM Signing and Verification:** Signs sample emails and verifies their signatures locally.
+- **DMARC Checker:** Evaluates SPF/DKIM domain alignment and reports the configured DMARC policy.
+- **Security Headers:** Adds HTTP security headers to Flask responses.
+- **Automated Testing:** Includes unit and application route tests using pytest.
 
-## Technologies Used
+## Technology Stack
 
-- Python 3.12
-- Flask
-- HTML5
-- CSS3
-- JavaScript
-- dnspython
-- cryptography
-- dkimpy
-- pytest
+| Technology | Purpose |
+|---|---|
+| Python | Backend programming |
+| Flask | Web framework |
+| HTML, CSS, JavaScript | Frontend |
+| dnspython | DNS record lookup |
+| cryptography | RSA key generation |
+| dkimpy | DKIM signing and verification |
+| pytest | Automated testing |
+| Gunicorn | Production WSGI server |
+| Render | Cloud deployment |
+| Git and GitHub | Version control |
 
 ## Project Structure
 
 ```text
 MailShield/
-│
 ├── app.py
 ├── requirements.txt
 ├── README.md
 ├── .gitignore
-│
 ├── src/
 │   ├── __init__.py
 │   ├── header_parser.py
 │   ├── spf_checker.py
 │   ├── dkim_handler.py
 │   └── dmarc_checker.py
-│
 ├── templates/
 │   └── index.html
-│
 ├── static/
 │   ├── style.css
 │   └── script.js
-│
 ├── keys/
-│   ├── dkim_private.pem
-│   └── dkim_public.pem
-│
+│   └── Generated locally (not committed)
 └── tests/
     ├── test_mailshield.py
     ├── test_dkim.py
@@ -61,14 +59,12 @@ MailShield/
     └── test_dmarc.py
 ```
 
-*Note: Generated DKIM key files are local and excluded from Git.*
-
 ## Installation and Setup
 
 ### 1. Clone the repository
 
 ```bash
-git clone YOUR_GITHUB_REPOSITORY_URL
+git clone https://github.com/dev-bhoomi17/MailShield.git
 cd MailShield
 ```
 
@@ -80,10 +76,10 @@ python -m venv venv
 
 ### 3. Activate the virtual environment
 
-**Windows PowerShell:**
+**Windows:**
 
 ```powershell
-.\venv\Scripts\Activate.ps1
+venv\Scripts\activate
 ```
 
 ### 4. Install dependencies
@@ -92,55 +88,59 @@ python -m venv venv
 python -m pip install -r requirements.txt
 ```
 
-### 5. Run the application
+### 5. Configure the Flask secret key
+
+For local development, set a secret key before running the application.
+
+```powershell
+$env:FLASK_SECRET_KEY = "replace-with-a-unique-secret"
+```
+
+### 6. Run the application
 
 ```bash
 python app.py
 ```
 
-Open the following address in your browser:
+Open the following URL in your browser:
 
-```text
-http://127.0.0.1:5000/
-```
+http://127.0.0.1:5000
 
 ## Running Tests
 
-Run the automated test suite using:
+Run the complete automated test suite:
 
 ```bash
 python -m pytest -v
 ```
 
-The project currently includes **17 automated tests** covering authentication logic, application routes, error handling, and security headers.
+**Latest local test result:** 17 tests passed.
 
 ## Security Considerations
 
-- DKIM private keys are excluded from version control.
-- Flask debug mode is disabled.
-- Request size is limited to 64 KB.
-- Basic HTTP security headers are configured.
-- Never upload private keys or secret environment variables to a public repository.
-- Configure a strong `FLASK_SECRET_KEY` environment variable before deployment.
+- Private DKIM keys are excluded from Git using `.gitignore`.
+- Flask secret configuration is provided through an environment variable.
+- The application limits request size to 64 KB.
+- HTTP security headers are configured.
+- Generated DKIM keys should be handled securely.
 
 ## Current Limitations
 
-This project is an educational demonstration and is not a complete production email authentication server.
-
-- **SPF:** Supports `ip4`, `ip6`, and `all` mechanisms. It does not implement the complete SPF specification.
-- **DKIM:** Performs local signing and verification using a locally generated public key. It does not publish DNS records or send emails.
-- **DMARC:** Implements exact domain alignment. It does not support relaxed organizational-domain alignment or enforce quarantine/reject policies.
-- **Header Analyzer:** Parses authentication results already present in pasted email headers. It does not independently authenticate the original email.
+- **SPF:** The evaluator supports `ip4`, `ip6`, and `all`; it is not a complete implementation of the SPF specification.
+- **DKIM:** Signing and verification use locally generated keys. DNS publication and actual email delivery are not implemented.
+- **DMARC:** The evaluator supports exact domain alignment and reports policy; it does not enforce quarantine or rejection.
+- **Header Analyzer:** It parses authentication results already present in the supplied headers. It does not independently authenticate the original email.
 
 ## Future Enhancements
 
-- Complete SPF specification support.
+- Full SPF specification support.
 - Relaxed DMARC alignment.
-- Integration with real DNS records.
-- Email server integration.
-- Authentication reporting and analytics.
-- Enhanced security and deployment configuration.
+- Integration with real email servers.
+- Secure persistent DKIM key management.
+- Detailed authentication reports and analytics.
 
 ## Project Purpose
 
-MailShield was developed as an academic project to explore email authentication protocols, understand email security mechanisms, and demonstrate their implementation through a web-based application.
+MailShield demonstrates the working principles of email authentication and common mechanisms used to help protect email domains against spoofing and unauthorized use.
+
+Developed as an academic project using Python, Flask, and web technologies.
